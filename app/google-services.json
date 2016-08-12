@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "282720993183",
+    "firebase_url": "https://myvoteapp-a698c.firebaseio.com",
+    "project_id": "myvoteapp-a698c",
+    "storage_bucket": "myvoteapp-a698c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:282720993183:android:45836842de2f3257",
+        "android_client_info": {
+          "package_name": "com.example.anand.myvoteapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "282720993183-lj7gkedeqq1vt0b0o8pibrgjr9ge2md0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.anand.myvoteapp",
+            "certificate_hash": "F9505350DBFF1394F44B3BC797A47B75F35F8F07"
+          }
+        },
+        {
+          "client_id": "282720993183-n3pe6fmp2ft4t0s3jii2jofi91eepu0i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB8cu2-0PRctlOF0n9r3PMhXPky5yj5i0U"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "282720993183-n3pe6fmp2ft4t0s3jii2jofi91eepu0i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
