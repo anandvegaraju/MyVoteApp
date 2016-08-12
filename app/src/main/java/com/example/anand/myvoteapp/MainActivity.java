@@ -1,10 +1,14 @@
 package com.example.anand.myvoteapp;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
+
 import com.digits.sdk.android.AuthCallback;
 import com.digits.sdk.android.Digits;
 import com.twitter.sdk.android.core.TwitterAuthConfig;
@@ -29,10 +33,26 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY,TWITTER_SECRET);
-        Fabric.with(this, new TwitterCore(authConfig), new Digits());
+        Fabric.with(this, new TwitterCore(authConfig), new Digits.Builder().build());
         setContentView(R.layout.activity_main);
         DigitsAuthButton digitsButton = (DigitsAuthButton) findViewById(R.id.auth_button);
-        digitsButton.setCallback(((MyVoteApp) getApplication()).getAuthCallback());
+        digitsButton.setCallback(new AuthCallback() {
+            @Override
+            public void success(DigitsSession session, String phoneNumber) {
+                // TODO: associate the session userID with your user model
+                Toast.makeText(getApplicationContext(), "Authentication successful for "
+                        + phoneNumber, Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(MainActivity.this,Choice.class);
+                intent.putExtra("phnum",phoneNumber);
+                startActivity(intent);
+            }
+
+            @Override
+            public void failure(DigitsException exception) {
+                Log.d("Digits", "Sign in with Digits failure", exception);
+            }
+        });
+
 
 
 
