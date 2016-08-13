@@ -30,7 +30,7 @@ public class SubmitActivity extends AppCompatActivity {
         Intent i = getIntent();
         final String ph = i.getStringExtra("phonenum");
         final String ch = i.getStringExtra("choice");
-        userdata.setText("Confirm your details\n Phone: "+i.getStringExtra("phonenum")+"\nChoice: "+i.getStringExtra("choice"));
+        userdata.setText("Confirm your details\n\n Phone: \t"+i.getStringExtra("phonenum")+"\nChoice: \t"+i.getStringExtra("choice"));
 
 
         Button confirmbutton = (Button)findViewById(R.id.confirm_button);
@@ -42,19 +42,24 @@ public class SubmitActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         // Read from the database
-                        mDatabase1.addValueEventListener(new ValueEventListener() {
+                        mDatabase1.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
                                 // This method is called once with the initial value and again
                                 // whenever data at this location is updated.
                                 String value = dataSnapshot.getValue(String.class);
 
-                                if (value.contains("false")||value.contains("true")){
+                                if (value.contains("false")){
                                     Intent i2 = new Intent(SubmitActivity.this,ThankYou.class);
 
                                     i2.putExtra("choice",ch);
                                     i2.putExtra("phnum",ph);
                                     startActivity(i2);
+                                }
+                                else if (value.contains("true")){
+                                    Intent i1 = new Intent(SubmitActivity.this,ErrorScreen.class);
+                                    i1.putExtra("errormsg","You have already voted");
+                                    startActivity(i1);
                                 }
                             }
 

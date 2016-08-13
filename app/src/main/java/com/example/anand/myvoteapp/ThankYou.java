@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -31,8 +33,18 @@ public class ThankYou extends AppCompatActivity {
         myRef5.setValue("true");
 
         Toast.makeText(getApplicationContext(),"Success",Toast.LENGTH_SHORT).show();
+        Button exitbutton = (Button)findViewById(R.id.exit_button);
+        exitbutton.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent homeIntent = new Intent(Intent.ACTION_MAIN);
+                        homeIntent.addCategory( Intent.CATEGORY_HOME );
+                        homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(homeIntent);
+                    }
+                }
+        );
 
-        android.os.Process.killProcess(android.os.Process.myPid());
-        System.exit(1);
     }
 }

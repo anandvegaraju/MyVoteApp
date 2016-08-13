@@ -54,7 +54,7 @@ public class Choice extends AppCompatActivity {
 
                         RadioButton selec = (RadioButton)findViewById(i);
                         assert selec!=null;
-                        Toast.makeText(getApplicationContext(),"You have selected "+selec.getText(),Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(),"You have selected "+selec.getText(),Toast.LENGTH_SHORT).show();
                     }
                 }
         );
@@ -66,7 +66,7 @@ public class Choice extends AppCompatActivity {
                     public void onClick(View view) {
                         if (option1.isChecked()||option2.isChecked()||option3.isChecked()||option4.isChecked()||option5.isChecked()){
 
-                            mDatabase.addValueEventListener(new ValueEventListener() {
+                            mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot) {
                                     // This method is called once with the initial value and again
@@ -84,7 +84,9 @@ public class Choice extends AppCompatActivity {
                                     }
                                     else {
                                         Toast.makeText(getApplicationContext(),"Invalid user",Toast.LENGTH_SHORT).show();
+
                                         Intent goerror = new Intent(Choice.this,ErrorScreen.class);
+                                        goerror.putExtra("errormsg","Sorry! You are not a registered user.");
                                         startActivity(goerror);
                                     }
                                 }

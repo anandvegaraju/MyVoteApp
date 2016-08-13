@@ -18,7 +18,10 @@ public class ErrorScreen extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.error_activity);
+        Intent intent = getIntent();
+        String errormsg = intent.getStringExtra("errormsg");
         TextView textView = (TextView)findViewById(R.id.textView);
+        textView.setText(errormsg);
         Button backbutton = (Button)findViewById(R.id.goback);
         backbutton.setOnClickListener(
                 new View.OnClickListener() {
