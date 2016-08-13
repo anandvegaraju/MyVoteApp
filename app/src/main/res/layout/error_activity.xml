@@ -27,9 +27,9 @@
         android:text="Exit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:id="@+id/exitbutton1"
         android:layout_below="@+id/goback"
         android:layout_alignLeft="@+id/goback"
-        android:layout_alignStart="@+id/goback"
-        android:layout_marginTop="49dp"
-        android:id="@+id/exitbutton1" />
+        android:layout_alignStart="@+id/goback" />
 </RelativeLayout>
