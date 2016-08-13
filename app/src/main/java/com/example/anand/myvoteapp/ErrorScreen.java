@@ -32,5 +32,17 @@ public class ErrorScreen extends AppCompatActivity {
                     }
                 }
         );
+        Button exit1 = (Button)findViewById(R.id.exitbutton1);
+        exit1.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent homeIntent = new Intent(Intent.ACTION_MAIN);
+                        homeIntent.addCategory( Intent.CATEGORY_HOME );
+                        homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(homeIntent);
+                    }
+                }
+        );
     }
 }

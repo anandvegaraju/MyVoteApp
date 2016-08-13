@@ -29,8 +29,46 @@ public class ThankYou extends AppCompatActivity {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         final DatabaseReference myRef5 = database.getReference(s3);
         final DatabaseReference myRef3 = database.getReference(s2);
+
+        String option="";
+        switch (s2){
+            case "Choice1":
+                option = "option1";
+                break;
+            case "Choice2":
+                option = "option2";
+                break;
+            case "Choice3":
+                option = "option3";
+                break;
+            case "Choice4":
+                option = "option4";
+                break;
+
+            case "Choice5":
+                option = "option5";
+                break;
+        }
         myRef3.push().setValue(s3);
         myRef5.setValue("true");
+        final DatabaseReference myRef9 = database.getReference(option);
+        myRef9.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                int a = dataSnapshot.getValue(Integer.class);
+                int b = a + 1;
+                myRef9.setValue(b);
+
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
 
         Toast.makeText(getApplicationContext(),"Success",Toast.LENGTH_SHORT).show();
         Button exitbutton = (Button)findViewById(R.id.exit_button);
