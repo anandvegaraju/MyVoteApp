@@ -21,7 +21,7 @@ import com.google.firebase.database.ValueEventListener;
  */
 
 public class SubmitActivity extends AppCompatActivity {
-    private DatabaseReference mDatabase1,mDatabase2;
+    private DatabaseReference mDatabase1,mDatabase2,approval1;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +34,8 @@ public class SubmitActivity extends AppCompatActivity {
 
 
         Button confirmbutton = (Button)findViewById(R.id.confirm_button);
-        mDatabase1 = FirebaseDatabase.getInstance().getReference(ph);
+        mDatabase1 = FirebaseDatabase.getInstance().getReference(ph).child("voted");
+        approval1 = FirebaseDatabase.getInstance().getReference(ph).child("approved");
         mDatabase2 = FirebaseDatabase.getInstance().getReference(ch);
 
         confirmbutton.setOnClickListener(
@@ -42,35 +43,58 @@ public class SubmitActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         // Read from the database
-                        mDatabase1.addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
-                                // This method is called once with the initial value and again
-                                // whenever data at this location is updated.
-                                String value = dataSnapshot.getValue(String.class);
+                        approval1.addListenerForSingleValueEvent(
+                                new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(DataSnapshot dataSnapshot) {
+                                        String value = dataSnapshot.getValue(String.class);
+                                        if(value.contains("false")){
+                                            Intent intent = new Intent(SubmitActivity.this,ErrorScreen.class);
+                                            intent.putExtra("errormsg","Your account is not approved yet");
+                                            startActivity(intent);
+                                        }
+                                        else if (value.contains("true")){
+                                            mDatabase1.addListenerForSingleValueEvent(new ValueEventListener() {
+                                                @Override
+                                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                                    // This method is called once with the initial value and again
+                                                    // whenever data at this location is updated.
+                                                    String value1 = dataSnapshot.getValue(String.class);
 
-                                if (value.contains("false")){
-                                    Intent i2 = new Intent(SubmitActivity.this,ThankYou.class);
+                                                    if (value1.contains("false")){
+                                                        Intent i2 = new Intent(SubmitActivity.this,ThankYou.class);
 
-                                    i2.putExtra("choice",ch);
-                                    i2.putExtra("phnum",ph);
-                                    startActivity(i2);
+                                                        i2.putExtra("choice",ch);
+                                                        i2.putExtra("phnum",ph);
+                                                        startActivity(i2);
+                                                    }
+                                                    else if (value1.contains("true")){
+                                                        Intent i1 = new Intent(SubmitActivity.this,ErrorScreen.class);
+                                                        i1.putExtra("errormsg","You have already voted");
+                                                        startActivity(i1);
+                                                    }
+                                                }
+
+                                                @Override
+                                                public void onCancelled(DatabaseError error) {
+
+                                                    Intent intent = new Intent(SubmitActivity.this,ErrorScreen.class);
+                                                    intent.putExtra("errormsg","Oh snap! Failed to read data from our database");
+                                                    startActivity(intent);
+
+
+                                                }
+                                            });
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(DatabaseError databaseError) {
+
+                                    }
                                 }
-                                else if (value.contains("true")){
-                                    Intent i1 = new Intent(SubmitActivity.this,ErrorScreen.class);
-                                    i1.putExtra("errormsg","You have already voted");
-                                    startActivity(i1);
-                                }
-                            }
+                        );
 
-                            @Override
-                            public void onCancelled(DatabaseError error) {
-
-                                // Failed to read value
-
-
-                            }
-                        });
                     }
                 }
         );

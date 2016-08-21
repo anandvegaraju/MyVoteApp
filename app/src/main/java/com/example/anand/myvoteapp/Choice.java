@@ -93,7 +93,9 @@ public class Choice extends AppCompatActivity {
 
                                 @Override
                                 public void onCancelled(DatabaseError error) {
-
+                                    Intent i5 = new Intent(Choice.this,ErrorScreen.class);
+                                    i5.putExtra("errormsg","Oh snap! Some error occurred from our side ");
+                                    startActivity(i5);
 
                                 }
                             });

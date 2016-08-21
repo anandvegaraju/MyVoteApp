@@ -3,10 +3,9 @@ package com.example.anand.myvoteapp;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.digits.sdk.android.AuthCallback;
@@ -17,8 +16,6 @@ import io.fabric.sdk.android.Fabric;
 import com.digits.sdk.android.DigitsAuthButton;
 import com.digits.sdk.android.DigitsException;
 import com.digits.sdk.android.DigitsSession;
-import io.fabric.sdk.android.Fabric;
-
 
 
 public class MainActivity extends AppCompatActivity {
@@ -35,13 +32,25 @@ public class MainActivity extends AppCompatActivity {
         TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY,TWITTER_SECRET);
         Fabric.with(this, new TwitterCore(authConfig), new Digits.Builder().build());
         setContentView(R.layout.activity_main);
-        DigitsAuthButton digitsButton = (DigitsAuthButton) findViewById(R.id.auth_button);
+
+        TextView registertext = (TextView)findViewById(R.id.registertextview);
+        registertext.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent gotoregactivity = new Intent(MainActivity.this,RegistrationActivity.class);
+                        startActivity(gotoregactivity);
+                    }
+                }
+        );
+
+        DigitsAuthButton digitsButton = (DigitsAuthButton) findViewById(R.id.auth_button1);
         digitsButton.setCallback(new AuthCallback() {
             @Override
             public void success(DigitsSession session, String phoneNumber) {
                 // TODO: associate the session userID with your user model
                 Toast.makeText(getApplicationContext(), "Authentication successful for "
-                        + phoneNumber, Toast.LENGTH_LONG).show();
+                        + phoneNumber, Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(MainActivity.this,Choice.class);
                 intent.putExtra("phnum",phoneNumber);
                 startActivity(intent);

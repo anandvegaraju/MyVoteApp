@@ -19,6 +19,9 @@
         <activity android:name=".SubmitActivity"/>
         <activity android:name=".ErrorScreen" android:noHistory="true"/>
         <activity android:name=".ThankYou"/>
+        <activity android:name=".RegistrationActivity"/>
+        <activity android:name=".CompleteRegnActivity"/>
+        <activity android:name=".FinalRegActivity"/>
 
         <meta-data
             android:name="io.fabric.ApiKey"
@@ -28,5 +31,5 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.RECEIVE_SMS"/>
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-    
+
 </manifest>

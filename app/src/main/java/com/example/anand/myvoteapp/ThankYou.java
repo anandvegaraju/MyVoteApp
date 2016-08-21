@@ -27,8 +27,8 @@ public class ThankYou extends AppCompatActivity {
         String s2 = intent.getStringExtra("choice");
         String s3 = intent.getStringExtra("phnum");
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        final DatabaseReference myRef5 = database.getReference(s3);
-        final DatabaseReference myRef3 = database.getReference(s2);
+        final DatabaseReference myRef5 = database.getReference(s3).child("voted");
+        final DatabaseReference myRef3 = database.getReference(s2).child("voter");
 
         String option="";
         switch (s2){
@@ -49,7 +49,7 @@ public class ThankYou extends AppCompatActivity {
                 option = "option5";
                 break;
         }
-        myRef3.push().setValue(s3);
+        myRef3.setValue(s3);
         myRef5.setValue("true");
         final DatabaseReference myRef9 = database.getReference(option);
         myRef9.addListenerForSingleValueEvent(new ValueEventListener() {
