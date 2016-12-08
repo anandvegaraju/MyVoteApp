@@ -1,9 +1,11 @@
 package com.example.anand.myvoteapp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.telephony.TelephonyManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -28,6 +30,7 @@ public class ThankYou extends AppCompatActivity {
         String s3 = intent.getStringExtra("phnum");
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         final DatabaseReference myRef5 = database.getReference(s3).child("voted");
+        final DatabaseReference imeiRef = database.getReference(s3).child("imei");
         final DatabaseReference myRef3 = database.getReference(s2).child("voter");
 
         String option="";
@@ -50,6 +53,9 @@ public class ThankYou extends AppCompatActivity {
                 break;
         }
         myRef3.setValue(s3);
+        TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+        String imeitext = telephonyManager.getDeviceId();
+        imeiRef.setValue(imeitext);
         myRef5.setValue("true");
         final DatabaseReference myRef9 = database.getReference(option);
         myRef9.addListenerForSingleValueEvent(new ValueEventListener() {
