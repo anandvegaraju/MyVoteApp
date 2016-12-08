@@ -16,18 +16,6 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:layout_below="@+id/textView4"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="70dp"
-        android:id="@+id/nametext"
-        android:hint="Enter your name "
-        style="@style/Widget.AppCompat.EditText" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:inputType="date"
         android:ems="10"
         android:id="@+id/dobtext"
@@ -62,14 +50,35 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
+    <Button
+        android:text="Submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/submitregdetails"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:layout_marginTop="56dp"
+        android:id="@+id/nametext"
+        android:hint="Enter your name "
+        style="@style/Widget.AppCompat.EditText"
+        android:layout_below="@+id/textView4"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
     <RadioGroup
         android:layout_width="match_parent"
         android:layout_height="55dp"
-        android:layout_below="@+id/textView6"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="28dp"
-        android:id="@+id/genderselect">
+        android:id="@+id/genderselect"
+        android:layout_above="@+id/uniqueid"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="18dp">
 
         <RadioButton
             android:text="Male"
@@ -85,11 +94,15 @@
             android:id="@+id/femalebutton" />
     </RadioGroup>
 
-    <Button
-        android:text="Submit"
-        android:layout_width="wrap_content"
+    <EditText
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/submitregdetails"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/uniqueid"
+        android:layout_above="@+id/submitregdetails"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:hint="Enter Unique ID number"
+        android:maxLines="1" />
 </RelativeLayout>

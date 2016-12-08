@@ -28,7 +28,7 @@ public class CompleteRegnActivity extends AppCompatActivity {
         final String phnum = intent.getStringExtra("phnumb");
         textView.setText("Your mobile number is "+phnum);
 
-        final EditText nametext, dobtext, addtext;
+        final EditText nametext, dobtext, addtext, uidtext;
         final RadioGroup gender = (RadioGroup)findViewById(R.id.genderselect);
         final RadioButton male = (RadioButton)findViewById(R.id.malebutton);
         final RadioButton female = (RadioButton)findViewById(R.id.femalebutton);
@@ -36,6 +36,7 @@ public class CompleteRegnActivity extends AppCompatActivity {
         nametext = (EditText)findViewById(R.id.nametext);
         dobtext = (EditText)findViewById(R.id.dobtext);
         addtext = (EditText)findViewById(R.id.addresstext);
+        uidtext = (EditText)findViewById(R.id.uniqueid);
         submitbutton.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
@@ -63,7 +64,7 @@ public class CompleteRegnActivity extends AppCompatActivity {
                             flag = 1;
                             Toast.makeText(getApplicationContext(),"Invalid age format",Toast.LENGTH_SHORT).show();
                         }
-                        if (flag == 0 && nametext.getText()!=null && dobtext.getText()!=null && addtext.getText()!=null && (male.isChecked()||female.isChecked())){
+                        if (flag == 0 && nametext.getText()!=null && dobtext.getText()!=null && addtext.getText()!=null && uidtext.getText()!=null && (male.isChecked()||female.isChecked())){
                             Intent gotofinalreg = new Intent(CompleteRegnActivity.this,FinalRegActivity.class);
                             gotofinalreg.putExtra("phnumb",phnum);
                             int idd = gender.getCheckedRadioButtonId();
@@ -72,11 +73,13 @@ public class CompleteRegnActivity extends AppCompatActivity {
                             String name = nametext.getText().toString();
                             String dob = dobtext.getText().toString();
                             String address = addtext.getText().toString();
+                            String uniqueid = uidtext.getText().toString();
 
                             gotofinalreg.putExtra("name",name);
                             gotofinalreg.putExtra("dob",dob);
                             gotofinalreg.putExtra("address",address);
                             gotofinalreg.putExtra("gender",genderr);
+                            gotofinalreg.putExtra("uid",uniqueid);
                             startActivity(gotofinalreg);
                         }else {
                             Toast.makeText(getApplicationContext(),"Complete the form",Toast.LENGTH_SHORT).show();

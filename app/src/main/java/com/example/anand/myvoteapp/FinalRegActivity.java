@@ -20,7 +20,10 @@ import com.google.firebase.database.ValueEventListener;
  */
 
 public class FinalRegActivity extends AppCompatActivity {
+
+    private int flag = 0;
     @Override
+
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.final_reg_activity);
@@ -30,11 +33,14 @@ public class FinalRegActivity extends AppCompatActivity {
         final String dob = intent.getStringExtra("dob");
         final String address = intent.getStringExtra("address");
         final String gender = intent.getStringExtra("gender");
+        final String uniqueid = intent.getStringExtra("uid");
+
         TextView textView = (TextView)findViewById(R.id.textView5);
-        textView.setText("Name : " + name + "\nDate of birth : " + dob + "\nAddress : " + address + "\nGender : " + gender + "\nPhone number : " + phnum);
+        textView.setText("Name : " + name + "\nDate of birth : " + dob + "\nAddress : " + address + "\nUnique ID : " + uniqueid + "\nGender : " + gender + "\nPhone number : " + phnum);
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         final DatabaseReference myRef99 = database.getReference("phonenumbers");
+        final DatabaseReference uidRef = database.getReference("uniqueids");
         final DatabaseReference myRef100 = database.getReference(phnum);
         Button finalsubbutton = (Button)findViewById(R.id.finalregbutton);
         finalsubbutton.setOnClickListener(
@@ -57,17 +63,42 @@ public class FinalRegActivity extends AppCompatActivity {
                                 }
                         );
 
+                        uidRef.addListenerForSingleValueEvent(
+                                new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(DataSnapshot dataSnapshot) {
+                                        String uidlist = dataSnapshot.getValue(String.class);
+                                        if(uidlist.contains(uniqueid)){
+                                            Intent gotoerror = new Intent(FinalRegActivity.this,ErrorScreen.class);
+                                            flag = 1;
+                                            gotoerror.putExtra("errormsg","Your have already registered with the UID " + uniqueid);
+                                            startActivity(gotoerror);
+                                        }else {
+                                            String u = uidlist + " " + uniqueid;
+                                            uidRef.setValue(u);
+                                            myRef100.child("name").setValue(name);
+                                            myRef100.child("dob").setValue(dob);
+                                            myRef100.child("address").setValue(address);
+                                            myRef100.child("gender").setValue(gender);
+                                            myRef100.child("Unique ID").setValue(uniqueid);
+                                            myRef100.child("approved").setValue("false");
+                                            myRef100.child("voted").setValue("false");
 
-                        myRef100.child("name").setValue(name);
-                        myRef100.child("dob").setValue(dob);
-                        myRef100.child("address").setValue(address);
-                        myRef100.child("gender").setValue(gender);
-                        myRef100.child("approved").setValue("false");
-                        myRef100.child("voted").setValue("false");
+                                            Toast.makeText(getApplicationContext(),"Successfully registered",Toast.LENGTH_SHORT).show();
+                                            Intent gotofirst = new Intent(FinalRegActivity.this,MainActivity.class);
+                                            startActivity(gotofirst);
+                                        }
+                                    }
 
-                        Toast.makeText(getApplicationContext(),"Successfully registered",Toast.LENGTH_SHORT).show();
-                        Intent gotofirst = new Intent(FinalRegActivity.this,MainActivity.class);
-                        startActivity(gotofirst);
+                                    @Override
+                                    public void onCancelled(DatabaseError databaseError) {
+
+                                    }
+                                }
+                        );
+
+
+
                     }
                 }
         );
