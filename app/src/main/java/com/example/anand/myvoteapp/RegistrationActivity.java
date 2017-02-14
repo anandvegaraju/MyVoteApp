@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 
 import com.digits.sdk.android.AuthCallback;
 import com.digits.sdk.android.Digits;
@@ -57,6 +58,7 @@ public class RegistrationActivity extends AppCompatActivity {
                                         else {
                                             Intent compreg = new Intent(RegistrationActivity.this,CompleteRegnActivity.class);
                                             compreg.putExtra("phnumb",phoneNumber);
+                                            Toast.makeText(getApplicationContext(),"Please wait",Toast.LENGTH_LONG).show();
                                             startActivity(compreg);
                                         }
                                     }

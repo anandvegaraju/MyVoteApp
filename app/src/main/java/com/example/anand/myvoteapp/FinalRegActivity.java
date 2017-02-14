@@ -80,7 +80,7 @@ public class FinalRegActivity extends AppCompatActivity {
                                             myRef100.child("dob").setValue(dob);
                                             myRef100.child("address").setValue(address);
                                             myRef100.child("gender").setValue(gender);
-                                            myRef100.child("Unique ID").setValue(uniqueid);
+                                            myRef100.child("UniqueID").setValue(uniqueid);
                                             myRef100.child("approved").setValue("false");
                                             myRef100.child("voted").setValue("false");
 
