@@ -32,6 +32,9 @@ public class MainActivity extends AppCompatActivity {
         TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY,TWITTER_SECRET);
         Fabric.with(this, new TwitterCore(authConfig), new Digits.Builder().build());
         setContentView(R.layout.activity_main);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setIcon(R.mipmap.ic_launcher);
 
         TextView registertext = (TextView)findViewById(R.id.registertextview);
         registertext.setOnClickListener(
@@ -45,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         );
 
         DigitsAuthButton digitsButton = (DigitsAuthButton) findViewById(R.id.auth_button1);
+        digitsButton.setText("Vote");
         digitsButton.setCallback(new AuthCallback() {
             @Override
             public void success(DigitsSession session, String phoneNumber) {

@@ -18,6 +18,9 @@ public class ErrorScreen extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.error_activity);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setIcon(R.mipmap.ic_launcher);
         Intent intent = getIntent();
         String errormsg = intent.getStringExtra("errormsg");
         TextView textView = (TextView)findViewById(R.id.textView);

@@ -25,6 +25,9 @@ public class ThankYou extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.thankyou);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setIcon(R.mipmap.ic_launcher);
         Intent intent = getIntent();
         String s2 = intent.getStringExtra("choice");
         String s3 = intent.getStringExtra("phnum");

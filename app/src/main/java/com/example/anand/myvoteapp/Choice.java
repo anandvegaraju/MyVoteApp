@@ -31,6 +31,9 @@ public class Choice extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.choose_choice);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setIcon(R.mipmap.ic_launcher);
         Intent intent2 = getIntent();
         final String mobilenumber = intent2.getStringExtra("phnum");
         TextView phonetext = (TextView)findViewById(R.id.textView2);
