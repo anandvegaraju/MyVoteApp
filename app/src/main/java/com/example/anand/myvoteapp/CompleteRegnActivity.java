@@ -14,7 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 /**
- * Created by Acer on 21-08-2016.
+ * Created by Anand on 21-08-2016.
  */
 
 public class CompleteRegnActivity extends AppCompatActivity {

@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 /**
- * Created by Acer on 12-08-2016.
+ * Created by Anand on 12-08-2016.
  */
 
 public class ErrorScreen extends AppCompatActivity {

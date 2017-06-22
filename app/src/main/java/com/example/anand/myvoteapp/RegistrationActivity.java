@@ -22,7 +22,7 @@ import com.twitter.sdk.android.core.TwitterCore;
 import io.fabric.sdk.android.Fabric;
 
 /**
- * Created by Acer on 21-08-2016.
+ * Created by Anand on 21-08-2016.
  */
 
 public class RegistrationActivity extends AppCompatActivity {

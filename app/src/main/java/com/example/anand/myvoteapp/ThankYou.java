@@ -17,7 +17,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 /**
- * Created by Acer on 12-08-2016.
+ * Created by Anand on 12-08-2016.
  */
 
 public class ThankYou extends AppCompatActivity {

@@ -16,7 +16,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 /**
- * Created by Acer on 21-08-2016.
+ * Created by Anand on 21-08-2016.
  */
 
 public class FinalRegActivity extends AppCompatActivity {
