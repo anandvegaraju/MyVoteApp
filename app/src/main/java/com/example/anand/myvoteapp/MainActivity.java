@@ -20,7 +20,6 @@ import com.digits.sdk.android.DigitsSession;
 
 public class MainActivity extends AppCompatActivity {
 
-    // Note: Your consumer key and secret should be obfuscated in your source code before shipping.
     private static final String TWITTER_KEY = "gN5ydNpGONZOjauIa4nm5OMkf";
     private static final String TWITTER_SECRET = "MGs5uEiKc1ga7IYUQZiyYIzOt7u5pmihbCr1PkZhd2fSId63QU";
     private AuthCallback authCallback;
